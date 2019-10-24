@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <h2>PIPELINE CONFLICTS</h2>
+    <p>There are some factors that cause the pipeline to deviate its normal performance. Some of these factors are given below:</p>
+  </head>
+  <body>
+    <h5>THE FETCHING PROBLEM</h5>
+    <p>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In general, supplying instructions rapidly through a pipeline is costly in terms of
+chip area. Buffering the data to be sent to the pipeline is one simple way of improving the overall
+utilization of a pipeline. The utilization of a pipeline is defined as the percentage of time that the stages of
+the pipeline are used over a sufficiently long period of time. A pipeline is utilized 100% of the time when
+every stage is used (utilized) during each clock cycle.</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Occasionally, the pipeline has to be drained and refilled, for example, whenever an interrupt or a branch
+occurs. The time spent refilling the pipeline can be minimized by having instructions and data loaded ahead
+of time into various geographically close buffers (like on-chip caches) for immediate transfer into the
+pipeline. If instructions and data for normal execution can be fetched before they are needed and stored in
+buffers, the pipeline will have a continuous source of information with which to work. Prefetch algorithms
+are used to make sure potentially needed instructions are available most of the time. Delays from memoryaccess conflicts can thereby be reduced if these algorithms are used, since the time required to transfer data
+from main memory is far greater than the time required to transfer data from a buffer.
+</p>
+<h5>THE BOTTLNECK PROBLEM</h5>
+<p>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;he bottleneck problem relates to the amount of load (work) assigned to a stage
+in the pipeline. If too much work is applied to one stage, the time taken to complete an operation at that
+stage can become unacceptably long. This relatively long time spent by the instruction at one stage will
+inevitably create a bottleneck in the pipeline system. In such a system, it is better to remove the bottleneck
+that is the source of congestion. One solution to this problem is to further subdivide the stage. Another
+solution is to build multiple copies of this stage into the pipeline.
+</p>
+<h4>THE ISSUING PROBLEM</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If an instruction is available, but cannot be executed for some reason, a hazard
+exists for that instruction. These hazards create issuing problems; they prevent issuing an instruction for
+execution. Three types of hazard are discussed here. They are called structural hazard, data hazard, and
+control hazard. A structural hazard refers to a situation in which a required resource is not available (or is
+busy) for executing an instruction. A data hazard refers to a situation in which there exists a data
+dependency (operand conflict) with a prior instruction. A control hazard refers to a situation in which an
+instruction, such as branch, causes a change in the program flow. Each of these hazards is explained next.
+</p>
+<h5>STRUCTURAL HAZARD</h5>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A structural hazard occurs as a result of resource conflicts between instructions. One
+type of structural hazard that may occur is due to the design of execution units. If an execution unit that
+requires more than one clock cycle (such as multiply) is not fully pipelined or is not replicated, then a
+sequence of instructions that uses the unit cannot be subsequently (one per clock cycle) issued for
+execution. Replicating and/or pipelining execution units increases the number of instructions that can be
+issued simultaneously. Another type of structural hazard that may occur is due to the design of register
+files. If a register file does not have multiple write (read) ports, multiple writes (reads) to (from) registers
+cannot be performed simultaneously. For example, under certain situations the instruction pipeline might
+want to perform two register writes in a clock cycle. This may not be possible when the register file has
+only one write port.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The effect of a structural hazard can be reduced fairly simply by implementing multiple execution units and
+using register files with multiple input/output ports.
+</p>
+<h5>DATA HAZARD</h5>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In a nonpipelined processor, the instructions are executed one by one, and the execution of
+an instruction is completed before the next instruction is started. In this way, the instructions are executed
+in the same order as the program. However, this may not be true in a pipelined processor, where instruction
+executions are overlapped. An instruction may be started and completed before the previous instruction is
+completed. The data hazard, which is also referred to as the data dependency problem, comes about as a
+result of overlapping (or changing the order of) the execution of data-dependent instructions. For example,
+in Figure 3.5 instruction i2 has a data dependency on i1 because it uses the result of i1 (i.e., the contents of
+register R2) as input data. If the instructions were sent to a pipeline in the normal manner, i2 would be in the
+OF stage before i1 passed through the WB stage. This would result in using the old contents of R2 for
+computing a new value for R5, leading to an invalid result. To have a valid result, i2 must not enter the OF
+stage until i1 has passed through the WB stage. In this way, as is shown in Figure 3.6, the execution of i2
+will be delayed for two clock cycles. In other words, instruction i2 is said to be stalled for two clock cycles.
+Often, when an instruction is stalled, the instructions that are positioned after the stalled instruction will
+also be stalled. However, the instructions before the stalled instruction can continue execution.</br>
+  <p align="center">                    i1 Add R2, R3, R4 -- R2=R3+R4</br>
+                            i2 Add R5, R2, R1 -- R5=R2+R1
+  </p>
+<img src ="4.jpeg"align="middle"height="500"width="800"/></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The delaying of execution can be accomplished in two ways. One way is to delay the OF or IF stages of i2
+for two clock cycles. To insert a delay, an extra hardware component called a pipeline interlock can be
+added to the pipeline. A pipeline interlock detects the dependency and delays the dependent instructions
+until the conflict is resolved. Another way is to let the compiler solve the dependency problem. During
+compilation, the compiler detects the dependency between data and instructions. It then rearranges these
+instructions so that the dependency is not hazardous to the system. If it is not possible to rearrange the
+instructions, NOP (no operation) instructions are inserted to create delays. For example, consider the four
+instructions. These instructions may be reordered so that i3 and i4, which are not dependent on
+   <p align="center">                  i1 and i2, are inserted between i1 and i2.</br>
+                            i1 Add R2, R3, R4 -- R2=R3+R4</br>
+                            i2 Add R5, R2, R1 -- R5=R2+R1</br>
+                            i3 Add R6, R6, R7 -- R6=R6+R7</br>
+                            i4 Add R8, R8, R7 -- R8=R8+R7</br>
+   </p>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the previous type of data hazard, an instruction uses the result of a previous instruction as input data. In
+addition to this type of data hazard, other types may occur in designs that allow concurrent execution of
+instructions. Note that the type of pipeline design considered so far preserves the execution order of
+instructions in the program. Later in this section we will consider architectures that allow concurrent
+execution of independent instructions.</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are three primary types of data hazards: RAW (read after write), WAR (write after read), and WAW
+(write after write). The hazard names denote the execution ordering of the instructions that must be
+maintained to produce a valid result; otherwise, an invalid result might occur. Each of these hazards is
+explained in the following discussion. In each explanation, it is assumed that there are two instructions i1
+and i2, and i2 should be executed after i1.</br>
+  </p>
+  </br>
+  <center><a href="home.html">>back...</a></center>
+
+
+  </body>
+</html>
