@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style.css">
+<h2>VERY LONG INSTRUCTION WORD</h2>
+</head>
+  <body>
+    <p>The very long instruction word (VLIW) approach makes
+extensive use of the compiler by requiring it to incorporate several small independent operations into a long
+instruction word. The instruction is large enough to provide, in parallel, enough control bits over many
+functional units. In other words, a VLIW architecture provides many more functional units than a typical
+processor design, together with a compiler that finds parallelism across basic operations to keep the
+functional units as busy as possible. The compiler compacts ordinary sequential codes into long instruction
+words that make better use of resources. During execution, the control unit issues one long instruction per
+cycle. The issued instruction initiates many independent operations simultaneously. </p>
+<p>A comparison of the three approaches will show a few interesting differences. For instance, the superscalar
+and VLIW approaches are more sensitive to resource conflicts than the superpipelined approach. In a
+superscalar or VLIW processor, a resource must be duplicated to reduce the chance of conflicts, while the
+superpipelined design avoids any resource conflicts. </p>
+<p>To prevent the superpipelined processor from being slower than the superscalar, the technology used in the
+superpipelined must reduce the delay of the lengthy instruction pipeline. Therefore, in general,
+superpipelined designs require faster transistor technology such as GaAs (gallium arsinide), whereas
+superscalar designs require more transistors to account for the hardware resource duplication. The
+superscalar design often uses CMOS technology, since this technology provides good circuit density.
+Although superpipelining seems to be a more straightforward solution than superscaling, existing
+technology generally favors increasing circuit density over increasing circuit speed. Historically, circuit
+density has increased at a faster rate than transistor speed. This historical precedent suggests a general
+conclusion that the superscalar approach is more cost effective for industry to implement. </p>
+<p>Technological advances have allowed superscalar and superpipelining techniques to be combined,
+providing good solutions to many current efficiency problems found in the computing industry. Such
+solutions, which attempt to take advantage of the positive attributes of each design, can be studied in
+existing processors. One example is the alpha microprocessor [DIG 92].</p>
+  <center><a href="conflicts.html">>back...</a></center>
+  </body>
+</html>

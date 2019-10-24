@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  </head>
+  <body>
+    <h2>SUPERPIPELINE</h2>
+    <p>The superpipeline approach achieves high performance by overlapping the execution of
+multiple instructions on one instruction pipeline. A superpipeline processor often has an instruction
+pipeline with more stages than a typical instruction pipeline design. In other words, the execution process
+of an instruction is broken down into even finer steps. By increasing the number of stages in the instruction
+pipeline, each stage has less work to do. This allows the pipeline clock rate to increase (cycle time
+decreases), since the clock rate depends on the delay found in the slowest stage of the pipeline.
+</P>
+ <p>An example of such an architecture is the MIPS R4000 processor. The R4000 subdivides instruction
+fetching and data cache access to create an eight-stage pipeline. The stages are instruction fetch first half,
+instruction fetch second half, register fetch, instruction execute, data cache access first half, data cache
+access second half, tag check, and write back. </p>
+<p>A superpipeline approach has certain benefits. The single functional unit requires less space and less logic
+on the chip than designs based on the superscalar approach. This extra space on the chip allows room for
+specialize circuitry to achieve higher speeds, room for large caches, and wide data paths. </p>
+  <center><a href="vliw.html">>Next...</a></center>
+  </body>
+</html>
